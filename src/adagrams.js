@@ -117,6 +117,36 @@ export const scoreWord = (word) => {
   return score;
 };
 
+// input: array of words
+// ouput: object for highest scored word: {word: 'actual word', score: points}
+// if a tie: prefer any word with 10 letters, then prefer word with fewest letters.
+// if tie of score and length, prefer whichever came first
+
 export const highestScoreFrom = (words) => {
-  // Implement this method for wave 1
+  // for word in words array, call scoreWord() func on each word
+  const scoreDict = {};
+  for (const word of words) {
+    scoreDict[scoreWord(word)] = word;
+  }
+  // { '5': 'HI', '7': 'MY', '8': 'MYA' }
+  // Realized this will not work, as there may be a tie score, and keys must be unique!!
+
+  // use Objects.keys(dictName) to get list of values only.
+  const scoreList = Object.keys(scoreDict);
+  // find the largest value with Math.max()
+  const highScore = Math.max(...scoreList);
+  // initialize an empty list to hold all words of w this score: let winningWords = [];
+  let winningWords = [];
+  // find words that match the score using
+  for (const [key, value] of Object.entries(scoreDict)) {
+    if (value == highScore) {
+      winningWords.push(key);
+    }
+  }
+
+  // loop through winningWords, check for length(10), then for longest length
+  for (let word in winningWords) {
+    if (word.length === 10) {
+    }
+  }
 };
